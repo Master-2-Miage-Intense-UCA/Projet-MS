@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +21,11 @@ public class OrderController {
     @PostMapping(value = "/order")
     public ResponseEntity<Order> createNewOrder()
     {
-        Order order = orderRepository.save(new Order());
+        Order o = new Order();
+        o.setCartId(1L);
+        o.setTotal(0D);
+        o.setChecked(false);
+        Order order = orderRepository.save(o);
         if (order == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldn't create a new order");
         return new ResponseEntity<Order>(order, HttpStatus.CREATED);

@@ -6,7 +6,11 @@
 </head>
 <body>
 
-    <h1>Est ce que c'est toujours bon le vous ?</h1>
-    <p th:text= "${cart.id}"></p>
+    <h1>Pannier</h1>
+    <div th:each="product : ${cart.products}" class="col-md-4 my-1">
+        <a th:href="@{|/product-detail/${product.productId}|}" >
+            <p th:text= "${product.productId}"></p>
+        </a>
+    </div>
 </body>
 </html>

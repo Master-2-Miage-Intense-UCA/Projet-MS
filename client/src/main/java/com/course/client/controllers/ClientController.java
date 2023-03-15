@@ -42,4 +42,15 @@ public class ClientController {
         model.addAttribute("cart", cartBean.get());
         return "cart";
     }
+
+    @RequestMapping("/cart/{id}")
+    public String addCart(@PathVariable("id") long id,Model model) {
+        CartItemBean cartItem = new CartItemBean();
+        cartItem.setProductId(id);
+        cartItem.setQuantity(1);
+        msCartProxy.addProductToCart(1L, cartItem);
+        Optional<CartBean> cart =  msCartProxy.getCart(1L);
+        model.addAttribute("cart", cart.get());
+        return "cart";
+    }
 }

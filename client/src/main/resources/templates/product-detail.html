@@ -6,9 +6,11 @@
 </head>
 <body>
 
-  <h1>Est ce que c'est bon pour vous ? </h1>
     <p th:text="${product.name}"></p>
+  <img th:src="${product.illustration}"  class="card-img-top" />
   <p th:text="${product.description}"></p>
   <p th:text="${product.price}"></p>
+  <a th:href="@{|/cart/${product.id}|}">Ajouter au pannier</a>
+
 </body>
 </html>

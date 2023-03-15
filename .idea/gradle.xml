@@ -6,7 +6,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/cart" />
-        <option name="gradleJvm" value="corretto-11" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/cart" />
@@ -16,7 +16,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/client" />
-        <option name="gradleJvm" value="corretto-11" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/client" />
@@ -26,7 +26,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/order" />
-        <option name="gradleJvm" value="corretto-11" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/order" />
@@ -36,7 +36,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/product" />
-        <option name="gradleJvm" value="corretto-11" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/product" />

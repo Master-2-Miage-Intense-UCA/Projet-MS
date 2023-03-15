@@ -1,7 +1,10 @@
 package com.course.client.controllers;
 
+import com.course.client.beans.CartBean;
+import com.course.client.beans.CartItemBean;
 import com.course.client.beans.ProductBean;
 import com.course.client.proxies.MsProductProxy;
+import com.course.client.proxies.MsCartProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,8 @@ public class ClientController {
 
     @Autowired
     private MsProductProxy msProductProxy;
+    @Autowired
+    private MsCartProxy msCartProxy;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -33,8 +38,8 @@ public class ClientController {
 
     @RequestMapping("/cart")
     public String cart(Model model) {
-        //List<ProductBean> products =  msProductProxy.list();
-        //model.addAttribute("products", products);
+        Optional<CartBean> cartBean =  msCartProxy.getCart(1L);
+        model.addAttribute("cart", cartBean.get());
         return "cart";
     }
 }

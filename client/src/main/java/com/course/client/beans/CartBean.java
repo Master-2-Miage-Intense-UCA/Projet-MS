@@ -30,4 +30,8 @@ public class CartBean {
     public void addProduct(CartItemBean product) {
         this.products.add(product);
     }
+
+    public void emptyCart(){
+        products.clear();
+    }
 }

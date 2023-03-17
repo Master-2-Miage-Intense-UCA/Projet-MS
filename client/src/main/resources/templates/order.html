@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+    <a th:href="@{|/|}">Home</a>
+    <h1>Order N° <span th:text="${order.id}"></span> </h1>
+    <p th:text="${order.cartId}"></p>
+    <p th:text="${order.checked}"></p>
+    <p th:text="${order.total}"></p>
+    <a th:href="@{|/order/${order.id}|}">Finaliser la commande</a>
+</body>
+</html>

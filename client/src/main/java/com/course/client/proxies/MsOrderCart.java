@@ -16,4 +16,7 @@ public interface MsOrderCart {
 
     @GetMapping(value = "/order/{id}")
     public Optional<OrderBean> getOrder(@PathVariable Long id);
+
+    @PostMapping(value = "/order/{id}")
+    public ResponseEntity<OrderBean> makeOrder(@PathVariable Long id);
 }

@@ -5,12 +5,14 @@
     <title>Cart</title>
 </head>
 <body>
-
-    <h1>Pannier</h1>
+<a th:href="@{|/|}">Home</a>
+    <h1>Cart</h1>
     <div th:each="product : ${cart.products}" class="col-md-4 my-1">
         <a th:href="@{|/product-detail/${product.productId}|}" >
-            <p th:text= "${product.productId}"></p>
+            Product : <span th:text= "${product.productId}"></span> Quantity : <span th:text= "${product.quantity}"></span>
         </a>
-    </div>
+    </div><br>
+    <a th:href="@{|/order/|}">Make order</a>
+
 </body>
 </html>

@@ -7,7 +7,6 @@ import com.course.cart.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -45,6 +44,7 @@ public class CartController {
         return cart;
     }
 
+
     @PostMapping(value = "/cart/{id}")
     @Transactional
     public ResponseEntity<CartItem> addProductToCart(@PathVariable Long id, @RequestBody CartItem cartItem)
@@ -61,4 +61,20 @@ public class CartController {
 
         return new ResponseEntity<CartItem>(cartItem, HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/emptyCart/{id}")
+    public ResponseEntity<Cart> emptyCart(@PathVariable Long id)
+    {
+       Cart cart = cartRepository.findById(id).get();
+
+       if (cart == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't get cart");
+
+        cart.emptyCart();
+        cartRepository.save(cart);
+
+        return new ResponseEntity<Cart>(cart, HttpStatus.CREATED);
+    }
+
+
 }

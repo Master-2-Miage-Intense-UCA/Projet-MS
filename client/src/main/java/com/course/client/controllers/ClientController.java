@@ -2,10 +2,13 @@ package com.course.client.controllers;
 
 import com.course.client.beans.CartBean;
 import com.course.client.beans.CartItemBean;
+import com.course.client.beans.OrderBean;
 import com.course.client.beans.ProductBean;
+import com.course.client.proxies.MsOrderCart;
 import com.course.client.proxies.MsProductProxy;
 import com.course.client.proxies.MsCartProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 public class ClientController {
@@ -21,6 +25,8 @@ public class ClientController {
     private MsProductProxy msProductProxy;
     @Autowired
     private MsCartProxy msCartProxy;
+    @Autowired
+    private MsOrderCart msOrderProxy;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -49,8 +55,35 @@ public class ClientController {
         cartItem.setProductId(id);
         cartItem.setQuantity(1);
         msCartProxy.addProductToCart(1L, cartItem);
-        Optional<CartBean> cart =  msCartProxy.getCart(1L);
-        model.addAttribute("cart", cart.get());
-        return "cart";
+
+        List<ProductBean> products =  msProductProxy.list();
+        model.addAttribute("products", products);
+        return "index";
+    }
+
+    @RequestMapping("/order")
+    public String order(Model model) {
+        CartBean cart =  msCartProxy.getCart(1L).get();
+        OrderBean order =  msOrderProxy.createNewOrder().getBody();
+
+        List<CartItemBean> items = cart.getProducts();
+        AtomicReference<Double> total = new AtomicReference<>(0D);
+        items.forEach((i) -> {
+            ProductBean product =  msProductProxy.get(i.getProductId()).get();
+            total.updateAndGet(v -> v + product.getPrice());
+        });
+        order.setTotal(total.get());
+        model.addAttribute("order", order);
+        return "order";
+    }
+
+    @RequestMapping("/order/{id}")
+    public String makeOrder(@PathVariable("id") long id, Model model) {
+        OrderBean order = msOrderProxy.makeOrder(id).getBody();
+        CartBean cart =  msCartProxy.emptyCart(1L).getBody();
+
+        List<ProductBean> products =  msProductProxy.list();
+        model.addAttribute("products", products);
+        return "index";
     }
 }

@@ -33,6 +33,10 @@ public class Cart {
         return products;
     }
 
+    public void emptyCart(){
+        products.clear();
+    }
+
     public void addProduct(CartItem product) {
         this.products.add(product);
     }

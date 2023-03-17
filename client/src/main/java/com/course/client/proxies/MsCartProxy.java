@@ -25,4 +25,7 @@ public interface MsCartProxy {
 
     @GetMapping(value = "/cart/{id}")
     public Optional<CartItemBean> getProductCart(@PathVariable Long id);
+
+    @PostMapping(value = "/emptyCart/{id}")
+    public ResponseEntity<CartBean> emptyCart(@PathVariable Long id);
 }

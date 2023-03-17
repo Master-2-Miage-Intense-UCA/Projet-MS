@@ -1,13 +1,11 @@
 package com.example.order.domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Order {
+public class MsOrder {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,10 +16,10 @@ public class Order {
 
     public Boolean checked;
 
-    public Order() {
+    public MsOrder() {
     }
 
-    public Order(Long id, Long cartId, Double total, Boolean checked){
+    public MsOrder(Long id, Long cartId, Double total, Boolean checked){
         this.id = id;
         this.cartId = cartId;
         this.total = total;

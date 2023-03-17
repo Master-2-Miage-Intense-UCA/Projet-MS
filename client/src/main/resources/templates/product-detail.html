@@ -5,7 +5,7 @@
     <title>Product details</title>
 </head>
 <body>
-
+<a th:href="@{|/|}">Home</a>
     <p th:text="${product.name}"></p>
   <img th:src="${product.illustration}"  class="card-img-top" />
   <p th:text="${product.description}"></p>
